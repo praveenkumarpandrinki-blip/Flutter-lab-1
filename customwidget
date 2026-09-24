@@ -1,0 +1,162 @@
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const FoodOrderingApp());
+}
+
+// Main Application
+class FoodOrderingApp extends StatelessWidget {
+  const FoodOrderingApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Food Ordering App',
+      theme: ThemeData(
+        primarySwatch: Colors.orange,
+      ),
+      home: const FoodHomePage(),
+    );
+  }
+}
+
+// Reusable FoodCard Widget
+class FoodCard extends StatelessWidget {
+  final String foodName;
+  final double price;
+  final IconData foodIcon;
+
+  const FoodCard({
+    super.key,
+    required this.foodName,
+    required this.price,
+    required this.foodIcon,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      elevation: 5,
+      margin: const EdgeInsets.symmetric(
+        horizontal: 15,
+        vertical: 10,
+      ),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(15),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(15),
+        child: Row(
+          children: [
+            // Food Image/Icon
+            CircleAvatar(
+              radius: 35,
+              backgroundColor: Colors.orange.shade100,
+              child: Icon(
+                foodIcon,
+                size: 40,
+                color: Colors.orange,
+              ),
+            ),
+
+            const SizedBox(width: 20),
+
+            // Food Name and Price
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    foodName,
+                    style: const TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 5),
+                  Text(
+                    '₹${price.toStringAsFixed(0)}',
+                    style: const TextStyle(
+                      fontSize: 17,
+                      color: Colors.green,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
+            // Add to Cart Button
+            ElevatedButton(
+              onPressed: () {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text('$foodName added to cart'),
+                  ),
+                );
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.orange,
+                foregroundColor: Colors.white,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                  vertical: 10,
+                ),
+              ),
+              child: const Text(
+                'ADD TO CART',
+                style: TextStyle(fontSize: 12),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+// Food Home Page
+class FoodHomePage extends StatelessWidget {
+  const FoodHomePage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.orange.shade50,
+
+      // AppBar
+      appBar: AppBar(
+        title: const Text('Food Ordering App'),
+        centerTitle: true,
+        backgroundColor: Colors.orange,
+        foregroundColor: Colors.white,
+      ),
+
+      // Food Items
+      body: ListView(
+        children: const [
+          SizedBox(height: 15),
+
+          FoodCard(
+            foodName: 'Pizza',
+            price: 250,
+            foodIcon: Icons.local_pizza,
+          ),
+
+          FoodCard(
+            foodName: 'Burger',
+            price: 150,
+            foodIcon: Icons.fastfood,
+          ),
+
+          FoodCard(
+            foodName: 'Biryani',
+            price: 200,
+            foodIcon: Icons.rice_bowl,
+          ),
+        ],
+      ),
+    );
+  }
+}
