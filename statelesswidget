@@ -1,0 +1,186 @@
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const StudentProfileApp());
+}
+
+class StudentProfileApp extends StatelessWidget {
+  const StudentProfileApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Student Profile Card',
+      theme: ThemeData(
+        primarySwatch: Colors.indigo,
+      ),
+      home: const StudentProfilePage(),
+    );
+  }
+}
+
+class StudentProfilePage extends StatelessWidget {
+  const StudentProfilePage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.indigo.shade50,
+      appBar: AppBar(
+        title: const Text('Student Profile Card'),
+        centerTitle: true,
+        backgroundColor: Colors.indigo,
+      ),
+      body: Center(
+        child: SingleChildScrollView(
+          child: Container(
+            margin: const EdgeInsets.all(20),
+            padding: const EdgeInsets.all(20),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(20),
+              boxShadow: const [
+                BoxShadow(
+                  color: Colors.black26,
+                  blurRadius: 10,
+                  spreadRadius: 2,
+                  offset: Offset(0, 5),
+                ),
+              ],
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                // Profile Image
+                const CircleAvatar(
+                  radius: 55,
+                  backgroundColor: Colors.indigo,
+                  child: Icon(
+                    Icons.person,
+                    size: 65,
+                    color: Colors.white,
+                  ),
+                ),
+
+                const SizedBox(height: 20),
+
+                // Student Name
+                const Text(
+                  'John Doe',
+                  style: TextStyle(
+                    fontSize: 26,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.indigo,
+                  ),
+                ),
+
+                const SizedBox(height: 15),
+
+                // Student Details
+                const Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.badge, color: Colors.indigo),
+                    SizedBox(width: 10),
+                    Text(
+                      'Roll Number: 101',
+                      style: TextStyle(fontSize: 17),
+                    ),
+                  ],
+                ),
+
+                const SizedBox(height: 10),
+
+                const Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.school, color: Colors.indigo),
+                    SizedBox(width: 10),
+                    Text(
+                      'Branch: Computer Science',
+                      style: TextStyle(fontSize: 17),
+                    ),
+                  ],
+                ),
+
+                const SizedBox(height: 25),
+
+                // Phone Contact Card
+                Container(
+                  width: double.infinity,
+                  margin: const EdgeInsets.only(bottom: 15),
+                  padding: const EdgeInsets.all(15),
+                  decoration: BoxDecoration(
+                    color: Colors.indigo.shade50,
+                    borderRadius: BorderRadius.circular(15),
+                    boxShadow: const [
+                      BoxShadow(
+                        color: Colors.black12,
+                        blurRadius: 6,
+                        offset: Offset(0, 3),
+                      ),
+                    ],
+                  ),
+                  child: const Row(
+                    children: [
+                      Icon(
+                        Icons.phone,
+                        color: Colors.indigo,
+                        size: 30,
+                      ),
+                      SizedBox(width: 15),
+                      Text(
+                        '+91 98765 43210',
+                        style: TextStyle(
+                          fontSize: 17,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+
+                // Email Contact Card
+                Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.all(15),
+                  decoration: BoxDecoration(
+                    color: Colors.indigo.shade50,
+                    borderRadius: BorderRadius.circular(15),
+                    boxShadow: const [
+                      BoxShadow(
+                        color: Colors.black12,
+                        blurRadius: 6,
+                        offset: Offset(0, 3),
+                      ),
+                    ],
+                  ),
+                  child: const Row(
+                    children: [
+                      Icon(
+                        Icons.email,
+                        color: Colors.indigo,
+                        size: 30,
+                      ),
+                      SizedBox(width: 15),
+                      Expanded(
+                        child: Text(
+                          'johndoe@example.com',
+                          style: TextStyle(
+                            fontSize: 17,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
